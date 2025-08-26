@@ -2,7 +2,6 @@
 echo "requirements.."
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
-python3 -m pip install -r requirements_remote.txt
 echo "makemigrations.."
 python3 manage.py makemigrations --noinput
 python3 manage.py migrate --noinput
