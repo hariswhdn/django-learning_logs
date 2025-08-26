@@ -28,8 +28,9 @@ SECRET_KEY = 'django-insecure-mnv-bisgjz-u)rk#wx=e%+g-cb=x9#(84&xp7baj2^9yj3d+ne
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# vercel start
+ALLOWED_HOSTS = ['django-learning-logs.vercel.app', 'localhost', '127.0.0.1']
+# vercel end
 
 # Application definition
 
@@ -157,5 +158,4 @@ LOGIN_URL = 'accounts:login'
 
 # vercel start
 STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
-ALLOWED_HOSTS = ['django-learning-logs.vercel.app', 'localhost', '127.0.0.1']
 # vercel end
