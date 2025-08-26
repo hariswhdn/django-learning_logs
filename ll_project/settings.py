@@ -157,4 +157,5 @@ LOGIN_URL = 'accounts:login'
 
 # vercel start
 STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+ALLOWED_HOSTS = ['django-learning-logs.vercel.app', 'localhost', '127.0.0.1']
 # vercel end
