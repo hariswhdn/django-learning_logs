@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+# vercel start
+import dj_database_url
+# vercel end
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,6 +85,9 @@ DATABASES = {
     }
 }
 
+# vercel start
+DATABASES['default'] = dj_database_url.config()
+# vercel end
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -127,24 +133,28 @@ LOGIN_REDIRECT_URL = 'learning_logs:index'
 LOGOUT_REDIRECT_URL = 'learning_logs:index'
 LOGIN_URL = 'accounts:login'
 
-from platformshconfig import Config
+# from platformshconfig import Config
 
-config = Config()
-if config.is_valid_platform():
-    ALLOWED_HOSTS.append('.platformsh.site')
-    if config.appDir:
-        STATIC_ROOT = Path(config.appDir) / 'static'
-    if config.projectEntropy:
-        SECRET_KEY = config.projectEntropy
-    if not config.in_build():
-        db_settings = config.credentials('database')
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': db_settings['path'],
-                'USER': db_settings['username'],
-                'PASSWORD': db_settings['password'],
-                'HOST': db_settings['host'],
-                'PORT': db_settings['port'],
-            }
-        }
+# config = Config()
+# if config.is_valid_platform():
+#     ALLOWED_HOSTS.append('.platformsh.site')
+#     if config.appDir:
+#         STATIC_ROOT = Path(config.appDir) / 'static'
+#     if config.projectEntropy:
+#         SECRET_KEY = config.projectEntropy
+#     if not config.in_build():
+#         db_settings = config.credentials('database')
+#         DATABASES = {
+#             'default': {
+#                 'ENGINE': 'django.db.backends.postgresql',
+#                 'NAME': db_settings['path'],
+#                 'USER': db_settings['username'],
+#                 'PASSWORD': db_settings['password'],
+#                 'HOST': db_settings['host'],
+#                 'PORT': db_settings['port'],
+#             }
+#         }
+
+# vercel start
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+# vercel end

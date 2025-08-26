@@ -1,5 +1,5 @@
 name: 'll_python'
-type: 'python:3.13.7'
+type: 'python:3.13'
 
 relationships:
   database: 'db:postgresql'
