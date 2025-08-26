@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "requirements.."
-python3.x -m pip install --upgrade pip
-python3.x -m pip install -r requirements.txt
-python3.x -m pip install -r requirements_remote.txt
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements_remote.txt
 echo "makemigrations.."
-python3.x manage.py makemigrations --noinput
-python3.x manage.py migrate --noinput
+python3 manage.py makemigrations --noinput
+python3 manage.py migrate --noinput
 echo "collectstatic.."
 mkdir logs
-python3.x manage.py collectstatic --noinput --clear
+python3 manage.py collectstatic --noinput --clear
 rm -rf logs
