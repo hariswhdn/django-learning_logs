@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 # vercel start
 import os
-from dotenv import load_dotenv
+import dj_database_url
 # vercel end
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mnv-bisgjz-u)rk#wx=e%+g-cb=x9#(84&xp7baj2^9yj3d+ne'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # vercel start
 ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app", ".now.sh"]
@@ -133,6 +133,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# vercel start
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# vercel end
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -162,9 +166,3 @@ LOGIN_URL = 'accounts:login'
 #                 'PORT': db_settings['port'],
 #             }
 #         }
-
-# vercel start
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# vercel end
