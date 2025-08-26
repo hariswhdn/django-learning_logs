@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 # vercel start
-import dj_database_url
+import os
+from dotenv import load_dotenv
 # vercel end
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +30,7 @@ SECRET_KEY = 'django-insecure-mnv-bisgjz-u)rk#wx=e%+g-cb=x9#(84&xp7baj2^9yj3d+ne
 DEBUG = True
 
 # vercel start
-ALLOWED_HOSTS = ['django-learning-logs.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app", ".now.sh"]
 # vercel end
 
 # Application definition
@@ -79,15 +80,21 @@ WSGI_APPLICATION = 'll_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # vercel start
-DATABASES['default'] = dj_database_url.config()
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.getenv('PGDATABASE'),
+    'USER': os.getenv('PGUSER'),
+    'PASSWORD': os.getenv('PGPASSWORD'),
+    'HOST': os.getenv('PGHOST'),
+    'PORT': os.getenv('PGPORT', 5432),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+    'DISABLE_SERVER_SIDE_CURSORS': True,
+  }
+}
 # vercel end
 
 # Password validation
@@ -157,5 +164,7 @@ LOGIN_URL = 'accounts:login'
 #         }
 
 # vercel start
-STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # vercel end

@@ -15,5 +15,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'll_project.settings')
 
 application = get_wsgi_application()
 
-# vercel
+# vercel start
 app = application
+# vercel end
